@@ -1,4 +1,6 @@
-#Programming assignment 2
+# 0a89e6301d00bee782a8f92ab9b1e684617210c3
+
+#Programming assignment 2 example, updated code at line 94
 makeCacheMatrix <- function(x = numeric()) {
   m <- NULL
   set <- function(y) {
@@ -89,3 +91,30 @@ getting cached data
 [,1]       [,2]
 [1,]  0.6666667 -0.1666667
 [2,] -0.3333333  0.3333333
+
+#updated code below
+CacheInvertedMatrix <- function(x = matrix()) {
+  m <- NULL
+  set <- function(y){
+  x <<- y
+  m <<- NULL
+  }
+  get <- function()x
+  setInverse <- function(inverse) m <<- inverse
+  getInverse <- function() m 
+  list(set = set, get = get, 
+  setInverse = setInverse, 
+  getInverse = getInverse)
+}
+
+CheckCacheInvertedMatrix <- function(x, ...) {
+  m <- x$getInverse()
+  if(!is.null(m)){
+  message("getting cached data")
+  return(m)
+  }
+  mat <- x$get()
+  m <- solve(mat,...)
+  x$setInverse(m)
+  m
+}
